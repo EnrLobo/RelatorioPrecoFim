@@ -10,26 +10,26 @@ public class Impostos {
 		 return ipi;
 	}
 	
-	public void ICMS(double valor) {
+	public double ICMS(double valor) {
 		double aliMGSP = 0.1;
 		double aliSPMG = 0.9;
 		double aliRJMG = 0.5;
 		double aliRJSP = 0.8;
 		double aliSPRJ = 0.5;
 		double aliMGRJ = 0.7;
-		double icms;
+		double icms =0;
 		
-		System.out.println("SELECIONE O ESTADO DE ORIGEM DESEJADO/n"
-						+ "1 - Minas Gerias"
-						+ "2 - São Paulo"
-						+ "3 - Rio de Janeiro");
+		System.out.println("SELECIONE O ESTADO DE ORIGEM DESEJADO"
+						+ "\n1 - Minas Gerias"
+						+ "\n2 - São Paulo"
+						+ "\n3 - Rio de Janeiro");
 		int estOrigin = scan.nextInt();
 		scan.nextLine();
 		
-		System.out.println("SELECIONE O ESTADO DE DESTINO DESEJADO/n"
-				+ "1 - Minas Gerias"
-				+ "2 - São Paulo"
-				+ "3 - Rio de Janeiro");
+		System.out.println("SELECIONE O ESTADO DE DESTINO DESEJADO"
+				+ "\n1 - Minas Gerias"
+				+ "\n2 - São Paulo"
+				+ "\n3 - Rio de Janeiro");
 		int estDest = scan.nextInt();
 		scan.nextLine();
 		
@@ -38,28 +38,52 @@ public class Impostos {
 			System.out.println("O estado de origem selecionado foi Minas Gerais.");
 			if(estDest == 1) {
 				System.out.println("Isento");
+				icms = 0;
 			}
 			else if(estDest == 2) {
 				System.out.println("O estado de destino escolhido foi São Paulo.");
-				double aliFim = aliMGSP;
+				icms = valor*aliMGSP;
 			}
 			else {
 				System.out.println("O estado de destino escolhido foi o Rio de Janeiro.");
-				double aliFim = aliMGRJ;
+				icms = valor*aliMGRJ;
 			}
 			break;
 		case 2:
 			System.out.println("O estado de origem selecionado foi São Paulo.");
-			
+			if(estDest == 1) {
+				System.out.println("O estado de destino escolhido foi Minas Gerais.");
+				icms = valor*aliSPMG;
+			}
+			else if(estDest == 2) {
+				System.out.println("Isento");
+				icms = 0;
+			}
+			else {
+				System.out.println("O estado de destino escolhido foi o Rio de Janeiro.");
+				icms = valor*aliSPRJ;
+			}
 			break;
 		case 3:
 			System.out.println("O estado de origem selecionado foi Rio de Janeiro.");
-			
+			if(estDest == 1) {
+				System.out.println("O estado de destino escolhido foi Minas Gerais.");
+				icms = valor*aliRJMG;
+			}
+			else if(estDest == 2) {
+				System.out.println("O estado de destino escolhido foi São Paulo.");
+				icms = valor*aliRJSP;
+			}
+			else {
+				System.out.println("Isento");
+				icms = 0;
+			}
 			break;
 			
 		default:
 			break;
 		}
+		return icms;
 		}
 	
 	public double ISS(double valorServico, double aliPraticada) {
